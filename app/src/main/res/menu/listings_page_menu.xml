@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myapp="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activities.community_alerts.ListActivity">
+    <item
+        android:id="@+id/action_search_community_alert"
+        android:tooltipText="add new community alert"
+        android:orderInCategory="1"
+        myapp:showAsAction="always"
+        myapp:actionViewClass="android.widget.SearchView"
+        android:title="search" />
+
+    <item
+        android:id="@+id/action_add_community_alert"
+        android:tooltipText="add new community alert"
+        android:orderInCategory="2"
+        myapp:showAsAction="always"
+        android:icon="@drawable/ic_add"
+        android:title="ADD NEW ALERT" />
+
+
+</menu>

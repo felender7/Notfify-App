@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/SplashScreenTheme">
-        <activity android:name=".activities.community_alerts.CreateCommunityAlert"></activity>
+        <activity android:name=".activities.community_alerts.DetailsActivity"></activity>
+        <activity android:name=".activities.community_alerts.CreateActivity" />
+        <activity android:name=".activities.community_alerts.ListActivity" />
+        <activity android:name=".activities.community_alerts.Create" />
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

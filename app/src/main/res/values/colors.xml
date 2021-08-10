@@ -10,7 +10,7 @@
 
 
     <!-- custom colors-->
-    <color name="color_primary">#2F72B9</color>
+    <color name="color_primary">#2980b9</color>
     <color name="color_primary_variant">#5A97CF</color>
     <color name="color_secondary">#5A97CF</color>
     <color name="color_secondary_variant">#2F72B9</color>

@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activities.community_alerts.CreateActivity">
 
+    <item
+        android:id="@+id/viewAllMenuItem"
+        android:title="VIEW ALL"
+        android:icon="@drawable/m_list"
+        app:showAsAction="always" />
 </menu>

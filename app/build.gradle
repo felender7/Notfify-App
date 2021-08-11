@@ -3,13 +3,14 @@ plugins {
     id 'kotlin-android'
 }
 
+
 android {
     compileSdkVersion 31
     buildToolsVersion '30.0.3'
 
     defaultConfig {
         applicationId "co.za.theappbrewery.notify"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -42,4 +43,32 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+
+    //Third party libraries
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.github.ivbaranov:materiallettericon:0.2.3'
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    implementation 'io.github.inflationx:viewpump:2.0.3'
+    implementation 'com.yarolegovich:lovely-dialog:1.1.0'
+    implementation 'cn.gavinliu:ShapedImageView:0.8.7'
+
+
+    //Material datepicker
+    implementation 'com.shagi:material-datepicker:1.3'
+
+    //IMAGE CAROUSEL
+    implementation 'com.synnapps:carouselview:0.1.4'
+
+    //RUNTIME PERMISSIONS
+    implementation 'com.karumi:dexter:4.2.0'
+
+    //OPTIONAL - FILEPICKER+CAMERA - If you want to support API less than 19 then this
+    //the library to ommit/replace.
+    implementation 'com.github.maayyaannkk:ImagePicker:1.0.4'
+
+    //ABOUT US PAGE
+    implementation 'com.github.medyo:android-about-page:1.2.1'
+
+
 }

@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Notify</string>
+    <string name="categories_header">Categories</string>
+    <string-array name="categories_for_create_community_alert">Categories
+        <item>Emergency</item>
+        <item>Fire</item>
+        <item>Ambulance</item>
+        <item>Traffic</item>
+        <item>Help</item>
+        <item>Charity</item>
+        <item>Help</item>
+         <item>Business Promotions</item>
+    </string-array>
+
+    <string-array name="sub_categories_for_create_community_alert">Categories
+        <item>Robbery</item>
+        <item>Break in</item>
+        <item>Suspension behavior</item>
+        <item>Fire Brigade</item>
+        <item>Fire</item>
+        <item> I need work done </item>
+        <item>I Need Volunteers &amp; Sponsors</item>
+        <item>I Want to Volunteer </item>
+        <item> Announcements </item>
+        <item>I Need Volunteers &amp; Sponsors</item>
+        <item>Events</item>
+        <item>Promotions</item>
+    </string-array>
 </resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1082862297493",
+    "project_id": "notify-online-dev",
+    "storage_bucket": "notify-online-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082862297493:android:1b3c7df67d9b456126d69c",
+        "android_client_info": {
+          "package_name": "co.za.theappbrewery.notify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082862297493-960risp7r68a62drl1d04r89fup58f3l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEmBiKMbipbvPe2yoG6cZ4Hyw2H2UTeY0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082862297493-960risp7r68a62drl1d04r89fup58f3l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

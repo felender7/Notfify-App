@@ -45,6 +45,7 @@
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"></androidx.appcompat.widget.Toolbar>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/pickedImage"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="top|end"
@@ -54,7 +55,7 @@
                     app:cardCornerRadius="10dp">
 
                     <ImageView
-                        android:id="@+id/pickedImg"
+
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center_horizontal"

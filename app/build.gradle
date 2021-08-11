@@ -56,6 +56,11 @@ dependencies {
     implementation 'cn.gavinliu:ShapedImageView:0.8.7'
 
 
+    //Realtime database
+    implementation 'com.firebaseui:firebase-ui-database:4.3.2'
+    implementation platform('com.google.firebase:firebase-bom:28.3.0')
+
+
     //Material datepicker
     implementation 'com.shagi:material-datepicker:1.3'
 

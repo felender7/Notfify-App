@@ -1,10 +1,11 @@
 package co.za.theappbrewery.notify.core.models
 
+import com.google.firebase.database.Exclude
 import java.io.Serializable
 
 
 class Community {
-
+    @Exclude
     var key: String? = null
     var userId:Int? = null
     var title: String? = null

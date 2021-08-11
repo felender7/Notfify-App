@@ -1,228 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@color/whiteSmoke">
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/whiteSmoke"
-    android:orientation="vertical"
+    android:orientation="vertical">
 
-    tools:context=".MainActivity">
-
-    <RelativeLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/blue"
-        android:padding="5dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/createAlertHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="CREATE ALERT"
-            android:textColor="@android:color/white"
-            android:textSize="34sp" />
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/createAlertHeader"
-            android:layout_centerInParent="true"
-            android:text="Choose the type of alert you wish to create"
-            android:textColor="@android:color/white" />
-
-    </RelativeLayout>
-    
-    //Layout 1
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="5dp">
-
-        //add community card
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/addCommunity"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginRight="5dp"
-            android:backgroundTint="@color/orange"
-            android:contextClickable="true"
-            app:cardCornerRadius="5dp">
-
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/ic_community" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:text="COMMUNITY ALERT"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
-
-        </androidx.cardview.widget.CardView>
-
-        //add emergency card
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/addEmergency"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="5dp"
-            android:backgroundTint="@color/red"
-            android:contextClickable="true"
-            app:cardCornerRadius="5dp">
-
-
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/ic_emergency" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:text="EMERGENCY ALERT"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-    //Layout1 end
-
-    //Layout 2
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="5dp">
-        //add business promotions card
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/addPromotions"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginRight="5dp"
-            android:contextClickable="true"
-            app:cardBackgroundColor="@color/green"
-            app:cardCornerRadius="5dp">
-
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/ic_campaign" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:text="PROMOTION ALERT"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
-
-        </androidx.cardview.widget.CardView>
-
-
-        //add Miss person card
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/addMissing"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-
-            android:layout_marginLeft="5dp"
-            android:backgroundTint="@color/purple"
-            android:contextClickable="true"
-            app:cardCornerRadius="5dp">
-
-
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/ic_missing" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:text="MISSING PERSON"
-                android:textColor="@color/white"
-                android:textSize="20dp" />
-
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-    //Layout2 end
-    
-    <androidx.cardview.widget.CardView
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="50dp"
-        android:layout_gravity="center"
-        app:cardCornerRadius="5dp"
-
-        android:background="@color/white"
-        android:layout_width="310dp"
-        android:layout_height="100dp">
-
-        <ImageView
-            android:scaleType="fitXY"
-            android:src="@drawable/sample"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/whiteSmoke"
+            android:orientation="vertical"
 
-        </ImageView>
+            tools:context=".MainActivity">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/blue"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/createAlertHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="CREATE ALERT"
+                    android:textColor="@android:color/white"
+                    android:textSize="34sp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/createAlertHeader"
+                    android:layout_centerInParent="true"
+                    android:text="Choose the type of alert you wish to create"
+                    android:textColor="@android:color/white" />
+
+            </RelativeLayout>
+
+            //Layout 1
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                //add community card
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/addCommunity"
+
+                    android:layout_width="180dp"
+                    android:layout_height="150dp"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="@color/orange"
+                    android:contextClickable="true"
+                    app:cardCornerRadius="5dp">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_community" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="30dp"
+                        android:gravity="center"
+                        android:text="COMMUNITY ALERT"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+                </androidx.cardview.widget.CardView>
+
+                //add emergency card
+
+                <androidx.cardview.widget.CardView
+
+                    android:id="@+id/addEmergency"
+                    android:layout_width="180dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="10dp"
+                    android:backgroundTint="@color/red"
+                    android:contextClickable="true"
+                    app:cardCornerRadius="5dp">
 
 
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_emergency" />
 
-    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="30dp"
+                        android:gravity="center"
+                        android:text="EMERGENCY ALERT"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+            //Layout1 end
+
+            //Layout 2
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+                //add business promotions card
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/addPromotions"
+                    android:layout_width="180dp"
+                    android:layout_height="150dp"
+                    android:layout_marginRight="10dp"
+                    android:contextClickable="true"
+                    app:cardBackgroundColor="@color/green"
+                    app:cardCornerRadius="5dp">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_campaign" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="30dp"
+                        android:gravity="center"
+                        android:text="PROMOTION ALERT"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+                </androidx.cardview.widget.CardView>
 
 
-</LinearLayout>
-</ScrollView>
-//button navigation
+                //add Miss person card
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/addMissing"
+                    android:layout_width="180dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="5dp"
+                    android:backgroundTint="@color/purple"
+                    android:contextClickable="true"
+                    app:cardCornerRadius="5dp">
+
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_missing" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="30dp"
+                        android:gravity="center"
+                        android:text="MISSING PERSON ALERT"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            //Layout2 end
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="380dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+
+                android:layout_marginBottom="50dp"
+                android:background="@color/white"
+                app:cardCornerRadius="5dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/sample">
+
+                </ImageView>
+
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+    </ScrollView>
+    //button navigation
 
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         app:fabCradleMargin="20dp"
-        app:fabCradleVerticalOffset="10dp"
         app:fabCradleRoundedCornerRadius="20dp"
-        android:layout_gravity="bottom">
+        app:fabCradleVerticalOffset="10dp">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
@@ -242,8 +243,6 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_explore"
         app:layout_anchor="@id/bottomAppBar" />
-
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

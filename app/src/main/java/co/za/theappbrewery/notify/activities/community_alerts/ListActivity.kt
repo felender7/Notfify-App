@@ -1,12 +1,14 @@
 package co.za.theappbrewery.notify.activities.community_alerts
 
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import co.za.theappbrewery.notify.R
 import co.za.theappbrewery.notify.common.Utils.openActivity
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 
 class ListActivity : AppCompatActivity() {
@@ -24,6 +26,16 @@ class ListActivity : AppCompatActivity() {
         //set back button
         actionbar?.setDisplayHomeAsUpEnabled(true)
         actionbar?.setDisplayHomeAsUpEnabled(true)
+
+        val btnAddCom = findViewById<ExtendedFloatingActionButton>(R.id.extended_fab_save_com_alert)
+        btnAddCom.setOnClickListener{
+            openActivity(
+                this,
+                CreateActivity::class.java
+            )
+            finish()
+        }
+
 
 
     }

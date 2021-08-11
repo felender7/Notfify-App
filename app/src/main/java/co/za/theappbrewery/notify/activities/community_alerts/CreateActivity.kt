@@ -3,20 +3,27 @@ package co.za.theappbrewery.notify.activities.community_alerts
 import `in`.mayanknagwanshi.imagepicker.ImageSelectActivity
 import android.Manifest
 import android.app.Activity
-import android.app.ProgressDialog.show
+import android.app.ProgressDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
+import android.webkit.MimeTypeMap
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import co.za.theappbrewery.notify.R
 import co.za.theappbrewery.notify.activities.base.BaseActivity
 import co.za.theappbrewery.notify.common.Utils
+import co.za.theappbrewery.notify.core.db.Community
+import co.za.theappbrewery.notify.core.models.UploadComImageUrl
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -29,9 +36,18 @@ import java.io.File
 
 class CreateActivity : BaseActivity(){
 
+
+    private var UserId:Int =  1
+    private var date_created_at = System.currentTimeMillis()
+
+    //Database reference
+    private var mDatabaseRef: DatabaseReference? = null
+    private var mStorageRef: StorageReference? = null
+
     //image
-    private var resumedAfterImagePicker = false
-    private var chosenFile: File? = null
+    private var PICK_IMAGE_REQUEST = 1
+    private lateinit var imageView: ImageView
+    private var mImageUri: Uri? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +55,26 @@ class CreateActivity : BaseActivity(){
         setTheme(R.style.Theme_Notify)
         setContentView(R.layout.activity_create)
 
-        handleEvents()
+        // Get database reference for community alerts
+        mStorageRef = FirebaseStorage.getInstance().getReference("community_alerts_uploads")
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("community_alerts_uploads")
+
+        val edit_name:EditText = findViewById(R.id.titleTxt)
+        val edit_description:EditText=  findViewById(R.id.descriptionTxt)
+        val edit_location:EditText = findViewById(R.id.locationTxt)
+        val edit_date_created_at = System.currentTimeMillis()
+        val pickedImage = findViewById<ImageView>(R.id.pickedImage)
+        val btnAdd : ExtendedFloatingActionButton = findViewById(R.id.fabAddCommunity)
+        val community = Community()
+        val com_edit = intent.getSerializableExtra("EDIT") as Community?
+
+        //Choose  image
+        pickedImage.setOnClickListener {
+            openFileChooser()
+        }
+
+
+
 
         //actionbar
         val actionbar = supportActionBar
@@ -51,7 +86,8 @@ class CreateActivity : BaseActivity(){
         actionbar?.setDisplayHomeAsUpEnabled(true)
         actionbar?.setDisplayHomeAsUpEnabled(true)
 
-        val btn = findViewById<ExtendedFloatingActionButton>(R.id.extended_fab_save_com_alert)
+
+
 
         // Select Category
         val categories = resources.getStringArray(R.array.categories_for_create_community_alert)
@@ -66,12 +102,68 @@ class CreateActivity : BaseActivity(){
         dropDownAutoCompletetxtSubCat.setAdapter(arrayAdapterSubCategory)
 
 
-        btn.setOnClickListener {
-            val selectedCatValue: String = dropDownAutoCompletetxtCat.editableText.toString()
-            Toast.makeText(applicationContext, selectedCatValue, Toast.LENGTH_SHORT).show()
+        btnAdd.setOnClickListener {
 
+            //progress bar
+            val progressBarDailog = ProgressDialog(this)
+            progressBarDailog.setMessage("Saving Data...")
+            progressBarDailog.setCancelable(false)
+
+            val selectedCatValue: String = dropDownAutoCompletetxtCat.editableText.toString()
             val selectedSUBCatValue: String = dropDownAutoCompletetxtSubCat.editableText.toString()
-            Toast.makeText(applicationContext, selectedSUBCatValue, Toast.LENGTH_SHORT).show()
+
+
+            // Save information to database
+            val fileReference = mStorageRef!!.child(
+                System.currentTimeMillis().toString() + "." + getFileExtension(mImageUri!!))
+
+            fileReference.putFile(mImageUri!!).addOnSuccessListener {
+                fileReference.downloadUrl.addOnCompleteListener() { taskSnapshot ->
+                    val imageUrl = taskSnapshot.result.toString()
+                    println("url =$imageUrl")
+                    val upload = UploadComImageUrl(imageUrl)
+                    val uploadId = mDatabaseRef!!.push().key
+                    if (uploadId != null) {
+                        mDatabaseRef!!.child(uploadId).setValue(upload)}
+                    if (progressBarDailog.isShowing) progressBarDailog.dismiss()
+
+                    val com = Community()
+                    when (com_edit) {
+                        null -> {
+                            community.add(com)
+                                .addOnSuccessListener {
+                                    Toast.makeText(this, "Saved Successfully", Toast.LENGTH_SHORT).show()
+                                }
+                                .addOnFailureListener { er: Exception ->
+                                    Toast.makeText(this, "" + er.message, Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                        else -> {
+
+                            val hashMap: HashMap<String, Any> = HashMap()
+                            hashMap["name"] = edit_name.text.toString()
+
+
+                            community.update(com_edit.key, hashMap)
+                                .addOnSuccessListener {
+                                    Toast.makeText(this, "Record is updated", Toast.LENGTH_SHORT).show()
+                                    finish()
+                                }.addOnFailureListener { er: Exception ->
+                                    Toast.makeText(
+                                        this,
+                                        "" + er.message,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                        }
+                    }
+
+
+                }.addOnFailureListener {
+                    if (progressBarDailog.isShowing) progressBarDailog.dismiss()
+
+                }
+            }
 
         }
 
@@ -106,74 +198,32 @@ class CreateActivity : BaseActivity(){
         return super.onOptionsItemSelected(item)
     }
 
-    /**
-     * Capture or select image
-     */
-    private fun captureImage() {
-        val i = Intent(this, ImageSelectActivity::class.java)
-        i.putExtra(ImageSelectActivity.FLAG_COMPRESS, false) //default is true
-        i.putExtra(ImageSelectActivity.FLAG_CAMERA, true) //default is true
-        i.putExtra(ImageSelectActivity.FLAG_GALLERY, true) //default is true
-        startActivityForResult(i, 1213)
+
+    // function to open file from the phone
+    private fun openFileChooser() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(intent, PICK_IMAGE_REQUEST)
     }
 
-    /**
-     * After capturing or selecting image, we will get the image path
-     * and use it to instantiate a file object
-     */
+    // activity results for the open file
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && data != null) {
-            if (requestCode == 1213) {
-                val filePath =
-                    data.getStringExtra(ImageSelectActivity.RESULT_FILE_PATH)
-                chosenFile = File(filePath)
-                var  topImageImg = findViewById<ImageView>(R.id.topImageImg)
-                Picasso.get().load(chosenFile!!).error(R.drawable.image_not_found).into(topImageImg)
-            }
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
+            mImageUri = data.data!!
+            Picasso.get().load(mImageUri).into(imageView)
         }
-        resumedAfterImagePicker = true
     }
 
-    /**
-     * We use a library known as Dexter to check for permissions at
-     * runtime.If we haven't been granted then we present the user with
-     * a dialog to take him to settings page to grant us permission
-     */
-    private fun checkPermissionsThenPickImage() {
-        Dexter.withActivity(this)
-            .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-            .withListener(object : PermissionListener {
-                override fun onPermissionGranted(response: PermissionGrantedResponse) {
-                    show("Good...READ EXTERNAL PERMISSION GRANTED")
-                    captureImage()
-                }
-
-                override fun onPermissionDenied(response: PermissionDeniedResponse) {
-                    show("WHOOPS! PERMISSION DENIED: Please grant permission first")
-                    if (response.isPermanentlyDenied) {
-                        showSettingDialog()
-                    }
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    permission: PermissionRequest,
-                    token: PermissionToken
-                ) {
-                    Log.i("DEXTER PERMISSION", "Permission Rationale Should be shown")
-                    token.continuePermissionRequest()
-                }
-            }).check()
-    }
 
     /**
-     * Lets handle events and Show our single choice dialogs
+     * Get file extentions
      */
-    private fun handleEvents() {
-
-        val  pickedImage = findViewById<CardView>(R.id.pickedImage)
-        pickedImage.setOnClickListener { checkPermissionsThenPickImage() }
-
+    private fun getFileExtension(uri: Uri): String? {
+        val cR = contentResolver
+        val mime = MimeTypeMap.getSingleton()
+        return mime.getExtensionFromMimeType(cR.getType(uri))
     }
 
 }
